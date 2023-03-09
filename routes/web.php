@@ -28,5 +28,6 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'posts', 'as' => 'posts.'], function () {
     Route::get('create', [PostController::class, 'create'])->name('create');
+    Route::post('/', [PostController::class, 'store'])->name('store');
 });
 
