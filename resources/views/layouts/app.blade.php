@@ -55,6 +55,15 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                    {{--Role Admin--}}
+                                    @role('admin')
+                                    <a class="dropdown-item" href="{{ route('admin.index') }}">
+                                        {{ __('Admin Dashboard') }}
+                                    </a>
+                                    @endrole
+
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

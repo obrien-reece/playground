@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\{
-    HomeController,
-    PostController
-};
+use App\Http\Controllers\{AdminController, HomeController, PermissionController, PostController, RoleController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +22,12 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Auth::routes();
+
+Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
+    Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.index');
+});
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'posts', 'as' => 'posts.'], function () {
     Route::get('create', [PostController::class, 'create'])->name('create');
